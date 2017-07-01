@@ -13,11 +13,11 @@ import Users from './Users';
 
 const title = 'Users';
 
-function action() {
+function action(context) {
   return {
     chunks: ['users'],
     title,
-    component: <Layout><Users title={title} /></Layout>,
+    component: <Layout><Users title={title} id={context.params.id}/></Layout>,
   };
 }
 
