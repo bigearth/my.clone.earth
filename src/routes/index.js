@@ -54,6 +54,10 @@ const routes = {
         {
           path: '/:id',
           load: () => import(/* webpackChunkName: 'users' */ './users'),
+        },
+        {
+          path: '/:id/designs/:design_id',
+          load: () => import(/* webpackChunkName: 'designs' */ './designs'),
         }
       ]
     },
