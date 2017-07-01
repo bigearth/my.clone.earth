@@ -48,6 +48,23 @@ const routes = {
       path: '/callback',
       load: () => import(/* webpackChunkName: 'callback' */ './callback'),
     },
+    {
+      path: '/users',
+      children: [
+        {
+          path: '/:id',
+          load: () => import(/* webpackChunkName: 'users' */ './users'),
+        },
+        {
+          path: '/:id/designs/:design_id',
+          load: () => import(/* webpackChunkName: 'designs' */ './designs'),
+        },
+        {
+          path: '/:id/clones/:clone_id',
+          load: () => import(/* webpackChunkName: 'clones' */ './clones'),
+        }
+      ]
+    },
 
     // Wildcard routes, e.g. { path: '*', ... } (must go last)
     {
@@ -61,7 +78,7 @@ const routes = {
     const route = await next();
 
     // Provide default values for title, description etc.
-    route.title = `${route.title || 'Untitled Page'} - www.reactstarterkit.com`;
+    route.title = `${route.title || 'Untitled Page'}`;
     route.description = route.description || '';
 
     return route;
