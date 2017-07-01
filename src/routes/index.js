@@ -1,12 +1,3 @@
-/**
- * React Starter Kit (https://www.reactstarterkit.com/)
- *
- * Copyright © 2014-present Kriasoft, LLC. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
- */
-
 /* eslint-disable global-require */
 
 // The top-level (parent) route
@@ -48,7 +39,6 @@ const routes = {
       path: '/callback',
       load: () => import(/* webpackChunkName: 'callback' */ './callback'),
     },
-
     // Wildcard routes, e.g. { path: '*', ... } (must go last)
     {
       path: '*',
@@ -61,7 +51,7 @@ const routes = {
     const route = await next();
 
     // Provide default values for title, description etc.
-    route.title = `${route.title || 'Untitled Page'} - www.reactstarterkit.com`;
+    route.title = `${route.title || 'Untitled Page'}`;
     route.description = route.description || '';
 
     return route;
