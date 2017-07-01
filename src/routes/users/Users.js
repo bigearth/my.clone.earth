@@ -18,8 +18,9 @@ class Users extends React.Component {
     return (
       <div className={s.root}>
         <div className={s.container}>
-          <h1>Users</h1>
-          <p>ID: {this.props.id}</p>
+          <h1>Profile</h1>
+          <p>Username: {this.props.user.userName}</p>
+          <p>Email: {this.props.user.email}</p>
         </div>
       </div>
     );

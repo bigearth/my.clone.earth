@@ -13,11 +13,13 @@ import Users from './Users';
 
 const title = 'Users';
 
-function action(context) {
+async function action({params, fetch}) {
+  const resp = await fetch(`${process.env.REST_URL}/users/${params.id}`, { method: 'GET' });
+  const user = await resp.json();
   return {
     chunks: ['users'],
     title,
-    component: <Layout><Users title={title} id={context.params.id}/></Layout>,
+    component: <Layout><Users title={title} user={user}/></Layout>,
   };
 }
 
