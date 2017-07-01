@@ -39,6 +39,24 @@ const routes = {
       path: '/callback',
       load: () => import(/* webpackChunkName: 'callback' */ './callback'),
     },
+    {
+      path: '/users',
+      children: [
+        {
+          path: '/:id',
+          load: () => import(/* webpackChunkName: 'users' */ './users'),
+        },
+        {
+          path: '/:id/designs/:design_id',
+          load: () => import(/* webpackChunkName: 'designs' */ './designs'),
+        },
+        {
+          path: '/:id/clones/:clone_id',
+          load: () => import(/* webpackChunkName: 'clones' */ './clones'),
+        }
+      ]
+    },
+
     // Wildcard routes, e.g. { path: '*', ... } (must go last)
     {
       path: '*',
