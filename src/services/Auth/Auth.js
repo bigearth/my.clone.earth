@@ -89,7 +89,7 @@ export default class Auth {
 
     this.auth0.client.userInfo(accessToken, (err, profile) => {
       var auth0Manage = new auth0.Management({
-        domain: 'clone.auth0.com',
+        domain: `${process.env.AUTH0_DOMAIN}`,
         token: idToken
       });
 
