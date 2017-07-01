@@ -58,6 +58,10 @@ const routes = {
         {
           path: '/:id/designs/:design_id',
           load: () => import(/* webpackChunkName: 'designs' */ './designs'),
+        },
+        {
+          path: '/:id/clones/:clone_id',
+          load: () => import(/* webpackChunkName: 'clones' */ './clones'),
         }
       ]
     },
