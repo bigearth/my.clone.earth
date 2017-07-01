@@ -2,10 +2,10 @@ import auth0 from 'auth0-js';
 
 export default class Auth {
   auth0 = new auth0.WebAuth({
-    domain: 'clone.auth0.com',
-    clientID: 'R1CAWVZ5ib3kygZMbdDZKshzcu5o0P25',
-    redirectUri: 'http://localhost:3000/callback',
-    audience: 'https://clone.auth0.com/userinfo',
+    domain: `${process.env.AUTH0_DOMAIN}`,
+    clientID: `${process.env.AUTH0_CLIENTID}`,
+    redirectUri: `${process.env.AUTH0_REDIRECT_URI}`,
+    audience: `${process.env.AUTH0_AUDIENCE}`,
     responseType: 'token id_token',
     scope: 'openid'
   });
@@ -38,7 +38,7 @@ export default class Auth {
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
-    
+
     this.getProfile(function(err, userData) {
       localStorage.setItem('user_data', JSON.stringify(userData));
 
@@ -86,7 +86,7 @@ export default class Auth {
   getProfile(cb) {
     let accessToken = this.getAccessToken();
     let idToken = this.getIdToken();
-    
+
     this.auth0.client.userInfo(accessToken, (err, profile) => {
       var auth0Manage = new auth0.Management({
         domain: 'clone.auth0.com',
@@ -98,6 +98,6 @@ export default class Auth {
       });
 
     });
-    
+
   }
 }
