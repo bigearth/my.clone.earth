@@ -71,13 +71,13 @@ export default class Auth {
   isAuthenticated() {
     // Check whether the current time is past the
     // access token's expiry time
-    if (typeof localStorage === "undefined" || localStorage === null) {
-      let LocalStorage = require('node-localstorage').LocalStorage;
-      localStorage = new LocalStorage('./scratch');
-    }
 
-    let expiresAt = JSON.parse(localStorage.getItem('expires_at'));
-    return new Date().getTime() < expiresAt;
+    let expiresAt = localStorage.getItem('expires_at');
+    if(expiresAt) {
+      return new Date().getTime() < expiresAt;
+    } else {
+      return false;
+    }
   }
 
   getAccessToken() {
