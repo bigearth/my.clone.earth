@@ -1,18 +1,17 @@
-
 import auth0 from 'auth0-js';
-// import history from './history';
 
 export default class Auth {
   auth0 = new auth0.WebAuth({
     domain: 'clone.auth0.com',
     clientID: 'R1CAWVZ5ib3kygZMbdDZKshzcu5o0P25',
-    redirectUri: 'http://localhost:3000',
+    redirectUri: 'http://localhost:3000/callback',
     audience: 'https://clone.auth0.com/userinfo',
     responseType: 'token id_token',
     scope: 'openid'
   });
 
   login() {
+    localStorage.setItem('last_page', window.location.href);
     this.auth0.authorize();
   }
 
@@ -27,9 +26,7 @@ export default class Auth {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult);
-        history.replace('/home');
       } else if (err) {
-        history.replace('/home');
         console.log(err);
       }
     });
@@ -41,8 +38,23 @@ export default class Auth {
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
-    // navigate to the home route
-    history.replace('/home');
+    
+    this.getProfile(function(err, userData) {
+      localStorage.setItem('user_data', JSON.stringify(userData));
+
+      // navigate to the last visited route
+      let previous_url = localStorage.getItem('last_page') || '/';
+      window.location.href = previous_url;
+    });
+  }
+
+  getSession() {
+    return {
+      'access_token': localStorage.getItem('access_token'),
+      'id_token': localStorage.getItem('id_token'),
+      'expires_at': localStorage.getItem('expires_at'),
+      'user_data': localStorage.getItem('user_data')
+    }
   }
 
   logout() {
@@ -50,8 +62,10 @@ export default class Auth {
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
+    localStorage.removeItem('user_data');
+    localStorage.removeItem('last_page');
     // navigate to the home route
-    history.replace('/home');
+    window.location.href = '/';
   }
 
   isAuthenticated() {
@@ -59,5 +73,31 @@ export default class Auth {
     // access token's expiry time
     let expiresAt = JSON.parse(localStorage.getItem('expires_at'));
     return new Date().getTime() < expiresAt;
+  }
+
+  getAccessToken() {
+    return localStorage.getItem('access_token');
+  }
+
+  getIdToken() {
+    return localStorage.getItem('id_token');
+  }
+
+  getProfile(cb) {
+    let accessToken = this.getAccessToken();
+    let idToken = this.getIdToken();
+    
+    this.auth0.client.userInfo(accessToken, (err, profile) => {
+      var auth0Manage = new auth0.Management({
+        domain: 'clone.auth0.com',
+        token: idToken
+      });
+
+      auth0Manage.getUser(profile.sub, (err, userData) => {
+        cb(err, userData);
+      });
+
+    });
+    
   }
 }
