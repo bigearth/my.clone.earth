@@ -48,6 +48,10 @@ const routes = {
       path: '/callback',
       load: () => import(/* webpackChunkName: 'callback' */ './callback'),
     },
+    {
+      path: '/users',
+      load: () => import(/* webpackChunkName: 'users' */ './users'),
+    },
 
     // Wildcard routes, e.g. { path: '*', ... } (must go last)
     {
