@@ -5,7 +5,6 @@ import s from './Navigation.css';
 import Link from '../Link';
 import Auth from '../../services/Auth/Auth';
 
-
 class Navigation extends React.Component {
 
   constructor(props) {
