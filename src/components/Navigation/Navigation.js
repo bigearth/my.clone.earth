@@ -49,7 +49,9 @@ class Navigation extends React.Component {
               Login
             </a>
             <span className={s.spacer}>or</span>
-            <Link className={cx(s.link, s.highlight)} to="/register">Sign up</Link>
+            <a className={s.link} href="#" onClick={this.handleLogin.bind(this)}>
+              Sign up
+            </a>
           </span>
         )}
         { this.state.auth && (

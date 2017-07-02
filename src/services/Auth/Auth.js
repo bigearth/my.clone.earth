@@ -94,13 +94,27 @@ export default class Auth {
     let idToken = this.getIdToken();
 
     this.auth0.client.userInfo(accessToken, (err, profile) => {
-      var auth0Manage = new auth0.Management({
+      let auth0Manage = new auth0.Management({
         domain: `${process.env.AUTH0_DOMAIN}`,
         token: idToken
       });
 
       auth0Manage.getUser(profile.sub, (err, userData) => {
-        cb(err, userData);
+        // POST to create new user in mongo
+        let headers = new Headers();
+        headers.append("Content-Type", "application/json");
+        fetch(`${process.env.REST_URL}/users`, {
+          method: 'POST',
+          headers: headers,
+          body: JSON.stringify({
+            userName: userData.email.split('@')[0],
+            email: userData.email
+          })
+        }).then((response) => {
+          cb(err, userData);
+        }, (error) => {
+          console.log('error', error);
+        });
       });
 
     });
