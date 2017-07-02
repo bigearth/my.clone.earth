@@ -33,7 +33,7 @@ export default class Auth {
   }
 
   setSession(authResult) {
-    
+
     // Set the time that the access token will expire at
     let expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
     localStorage.setItem('access_token', authResult.accessToken);
@@ -45,7 +45,7 @@ export default class Auth {
 
       // navigate to the last visited route
       let previous_url = localStorage.getItem('last_page') || '/';
-      window.location.href = '/users/gabriel+7';
+      window.location.href = previous_url;
     });
   }
 
@@ -72,7 +72,6 @@ export default class Auth {
   isAuthenticated() {
     // Check whether the current time is past the
     // access token's expiry time
-
 
     if (typeof localStorage === "undefined" || localStorage === null) {
       return false;
