@@ -10,20 +10,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './Clones.css';
+import s from './Clone.css';
 
-class Clones extends React.Component {
+class Clone extends React.Component {
 
   render() {
     return (
       <div className={s.root}>
         <div className={s.container}>
-          <h1>Clones</h1>
-          <p>ID: {this.props.clone_id}</p>
+          <h1>Clone</h1>
+          <p>ID: {this.props.clone.title}</p>
         </div>
       </div>
     );
   }
 }
 
-export default withStyles(s)(Clones);
+export default withStyles(s)(Clone);
