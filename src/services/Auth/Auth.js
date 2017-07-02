@@ -44,7 +44,7 @@ export default class Auth {
 
       // navigate to the last visited route
       let previous_url = localStorage.getItem('last_page') || '/';
-      window.location.href = previous_url;
+      window.location.href = '/users/gabriel+7';
     });
   }
 
@@ -72,11 +72,12 @@ export default class Auth {
     // Check whether the current time is past the
     // access token's expiry time
 
-    let expiresAt = localStorage.getItem('expires_at');
-    if(expiresAt) {
-      return new Date().getTime() < expiresAt;
-    } else {
+
+    if (typeof localStorage === "undefined" || localStorage === null) {
       return false;
+    } else {
+      let expiresAt = localStorage.getItem('expires_at');
+      return new Date().getTime() < expiresAt;
     }
   }
 

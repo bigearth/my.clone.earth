@@ -9,7 +9,7 @@ class Home extends React.Component {
       <div className={s.root}>
         <div className={s.container}>
           <h1>My Clone Earth</h1>
-          
+
         </div>
       </div>
     );
