@@ -43,9 +43,8 @@ export default class Auth {
     this.getProfile(function(err, userData) {
       localStorage.setItem('user_data', JSON.stringify(userData));
 
-      // navigate to the last visited route
-      let previous_url = localStorage.getItem('last_page') || '/';
-      window.location.href = previous_url;
+      // navigate to the user's profile page
+      window.location.href = `/users/${userData.email.split('@')[0]}`;
     });
   }
 
