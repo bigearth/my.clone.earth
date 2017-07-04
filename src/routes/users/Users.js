@@ -29,6 +29,14 @@ class Users extends React.Component {
               </li>
             ))}
           </ul>
+          <h2>Designs</h2>
+          <ul>
+            {this.props.user.designs.map((design, index) => (
+              <li key={index}>
+                <Link className={s.link} to={`/users/${this.props.user.userName}/designs/${design.title}`}>{design.title}</Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     );

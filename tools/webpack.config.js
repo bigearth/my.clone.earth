@@ -1,12 +1,3 @@
-/**
- * React Starter Kit (https://www.reactstarterkit.com/)
- *
- * Copyright © 2014-present Kriasoft, LLC. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
- */
-
 import path from 'path';
 import webpack from 'webpack';
 import AssetsPlugin from 'assets-webpack-plugin';
@@ -423,7 +414,7 @@ const serverConfig = {
       'process.env.BROWSER': false,
       __DEV__: isDebug,
     }),
-    
+
     new Dotenv({
       path: './.env', // Path to .env file (this is the default)
       safe: true // load .env.example (defaults to "false" which does not use dotenv-safe)
