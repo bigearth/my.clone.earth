@@ -6,6 +6,7 @@ const title = 'Users';
 
 async function action({params, fetch}) {
 
+  console.log(process.env.REST_URL);
   const resp = await fetch(`${process.env.REST_URL}/users/${params.username}`, { method: 'GET' });
   const user = await resp.json();
   return {
