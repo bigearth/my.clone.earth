@@ -43,15 +43,15 @@ const routes = {
       path: '/users',
       children: [
         {
-          path: '/:id',
+          path: '/:username',
           load: () => import(/* webpackChunkName: 'users' */ './users'),
         },
         {
-          path: '/:id/designs/:design_id',
+          path: '/:username/designs/:design_id',
           load: () => import(/* webpackChunkName: 'designs' */ './designs'),
         },
         {
-          path: '/:id/clones/:clone_id',
+          path: '/:username/clones/:clone_id',
           load: () => import(/* webpackChunkName: 'clones' */ './clones'),
         }
       ]

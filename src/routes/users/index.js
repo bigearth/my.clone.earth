@@ -6,7 +6,7 @@ const title = 'Users';
 
 async function action({params, fetch}) {
 
-  const resp = await fetch(`${process.env.REST_URL}/users/${params.id}`, { method: 'GET' });
+  const resp = await fetch(`${process.env.REST_URL}/users/${params.username}`, { method: 'GET' });
   const user = await resp.json();
   return {
     chunks: ['users'],
