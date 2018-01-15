@@ -12,29 +12,46 @@ class Navigation extends React.Component {
     this.state = {'auth': false};
   }
 
-  handleLogin(e) {
-    e.preventDefault();
-    let auth = new Auth();
-    auth.login();
-  }
-
-  handleLogout(e) {
-    e.preventDefault();
-    let auth = new Auth();
-    auth.logout();
-  }
-
-  componentDidMount() {
-    let auth = new Auth();
-    let userObj = {};
-    if(auth.isAuthenticated()) {
-      userObj = auth.getSession();
-    }
-    this.setState({
-      'auth': auth.isAuthenticated(),
-      'user': userObj
-    });
-  }
+  // handleLogin(e) {
+  //   e.preventDefault();
+  //   let auth = new Auth();
+  //   auth.login();
+  // }
+  //
+  // handleLogout(e) {
+  //   e.preventDefault();
+  //   let auth = new Auth();
+  //   auth.logout();
+  // }
+  //
+  // componentDidMount() {
+  //   let auth = new Auth();
+  //   let userObj = {};
+  //   if(auth.isAuthenticated()) {
+  //     userObj = auth.getSession();
+  //   }
+  //   this.setState({
+  //     'auth': auth.isAuthenticated(),
+  //     'user': userObj
+  //   });
+  // }
+        
+        // { !this.state.auth && (
+        //   <span>
+        //     <a className={s.link} href="#" onClick={this.handleLogin.bind(this)}>
+        //       Login
+        //     </a>
+        //     <span className={s.spacer}>or</span>
+        //     <a className={s.link} href="#" onClick={this.handleLogin.bind(this)}>
+        //       Sign up
+        //     </a>
+        //   </span>
+        // )}
+        // { this.state.auth && (
+        //   <a className={s.link} href="#" onClick={this.handleLogout.bind(this)}>
+        //     Logout
+        //   </a>
+        // )}
 
   render() {
 
@@ -43,22 +60,6 @@ class Navigation extends React.Component {
         <Link className={s.link} to="/about">About</Link>
         <Link className={s.link} to="/contact">Contact</Link>
         <span className={s.spacer}> | </span>
-        { !this.state.auth && (
-          <span>
-            <a className={s.link} href="#" onClick={this.handleLogin.bind(this)}>
-              Login
-            </a>
-            <span className={s.spacer}>or</span>
-            <a className={s.link} href="#" onClick={this.handleLogin.bind(this)}>
-              Sign up
-            </a>
-          </span>
-        )}
-        { this.state.auth && (
-          <a className={s.link} href="#" onClick={this.handleLogout.bind(this)}>
-            Logout
-          </a>
-        )}
       </div>
     );
   }
